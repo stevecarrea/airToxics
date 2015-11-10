@@ -1,6 +1,7 @@
 library(readr)
 library(dplyr)
 library(ggplot2)
+library(plotly)
 
 tri <- read_csv('/Users/Steve/Github/epa_tri/data/TRI_2013_US.csv')
 names(tri)
@@ -20,7 +21,13 @@ emissions <- summarise(by_naics,
                    fugitive = mean(FUGITIVE_AIR, na.rm = TRUE))  #  Compute the average fugitive emission
 emissions <- filter(emissions, count > 100, stack < 10000)
 
-ggplot(emissions, aes(stack, fugitive)) +
+p_smooth <- ggplot(emissions, aes(stack, fugitive)) +
   geom_point(aes(size = count), alpha = 1/2) +
   geom_smooth() +
   scale_size_area()
+p_smooth 
+
+p <- ggplot(emissions, aes(stack, fugitive)) +
+  geom_point(aes(size = count), alpha = 1/2) +
+  scale_size_area()
+(gg <- ggplotly(p))
