@@ -3,7 +3,7 @@ library(dplyr)
 library(ggplot2)
 library(plotly)
 
-tri <- read_csv('/Users/Steve/Github/epa_tri/data/TRI_2013_US.csv')
+tri <- read_csv('/data/TRI_2013_US.csv')
 names(tri)
 colnames(tri)[36] <- "FUGITIVE_AIR"
 colnames(tri)[37] <- "STACK_AIR"
